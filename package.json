@@ -1,0 +1,25 @@
+{
+  "name": "efa-api-faker",
+  "version": "0.1.0",
+  "description": "Data entry generator for use with EFA API.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/williamtoader/EFA-api-faker.git"
+  },
+  "author": "Wiliam Toader",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/williamtoader/EFA-api-faker/issues"
+  },
+  "homepage": "https://github.com/williamtoader/EFA-api-faker#readme",
+  "dependencies": {
+    "@faker-js/faker": "^7.2.0",
+    "graphql": "^16.5.0",
+    "graphql-request": "^4.3.0"
+  }
+}
