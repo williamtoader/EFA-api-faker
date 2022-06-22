@@ -1,30 +1,20 @@
-import {api, queries, mutations} from "./api.js"
 import {faker} from "@faker-js/faker";
+import express from "express";
+import { generateUsers } from "./functions.js"
 
-const name = {
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName()
-}
+const app = express();
 
-api.call(mutations.CreateUser(
-    {
-        firstName: name.firstName,
-        lastName: name.lastName,
-        username: faker.internet.userName(name.firstName, name.lastName),
-        email: faker.internet.email(name.firstName, name.lastName),
-        password: faker.internet.password(10, true)
-    }
-)).then(
-    data => {
-        console.log("Mutation", data)
-        api.call(
-            queries.users
-        ).then(
-            data => console.log(data)
-        )
-    }
+app.get("/all-users", (req, res) => {
+    res.send(generateUsers());
+})
 
-)
+app.get("/all-users/:amount", (req, res) => {
+    res.send(generateUsers(req.params.amount));
+})
+
+app.listen(3000, () => console.log('Example app is listening on port http://localhost:3000.'));
+
+
 
 
 
