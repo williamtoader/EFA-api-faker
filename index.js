@@ -13,7 +13,7 @@ app.get("/all-users/:amount", (req, res) => {
 })
 
 app.get("/version", (req, res) => {
-    res.send("v0.0.1");
+    res.send("v0.0.2");
 })
 
 app.get("/", (req, res) => {
