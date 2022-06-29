@@ -38,7 +38,12 @@ const options = {
 
 const openapiSpecification = swaggerJsdoc(options);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
+const forwardedPrefixSwagger = async (req, res, next) => {
+    req.originalUrl = "(req.headers['x-forwarded-prefix'] || '')" + req.url;
+    next();
+};
+
+app.use('/api-docs', [forwardedPrefixSwagger, swaggerUi.serve], swaggerUi.setup(openapiSpecification));
 
 // ---------
 
