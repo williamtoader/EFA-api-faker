@@ -13,6 +13,23 @@ const app = express();
 const options = {
     definition: {
         openapi: '3.0.0',
+        servers: [
+            {
+                url: "https://efa-app.ml/mock/"
+            },
+            {
+                url: "http://efa-app.ml/mock/"
+            },
+            {
+                url: "https://www.efa-app.ml/mock/"
+            },
+            {
+                url: "http://www.efa-app.ml/mock/"
+            },
+            {
+                url: "/"
+            },
+        ],
         info: {
             title: 'EFA Mock API',
             version: '1.0.0',
