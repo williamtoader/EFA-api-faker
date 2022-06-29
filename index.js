@@ -15,7 +15,7 @@ app.get("/all-users", (req, res) => {
     if(checkHeaderAuth(req)) res.send(generateUsers());
     else {
         res.status(401);
-        res.send("Unauthorised");
+        res.send({error: "Unauthorised"});
     }
 })
 
@@ -23,7 +23,7 @@ app.get("/all-users/:amount", (req, res) => {
     if(checkHeaderAuth(req)) res.send(generateUsers(req.params.amount));
     else {
         res.status(401);
-        res.send("Unauthorised");
+        res.send({error: "Unauthorised"});
     }
 })
 
@@ -32,15 +32,18 @@ app.get("/version", (req, res) => {
 })
 
 app.get("/", (req, res) => {
-    if(checkHeaderAuth(req)) res.send("Hello from mock sever!");
+    if(checkHeaderAuth(req)) res.send({message: "Hello from mock sever!"});
     else {
         res.status(401);
-        res.send("Unauthorised");
+        res.send({error: "Unauthorised"});
     }
 })
 
 let regUsers = [
-
+    {
+        email: "test@test.com",
+        password: "1234"
+    }
 ]
 
 app.post("/login", jsonParser, (req, res) => {
@@ -49,10 +52,10 @@ app.post("/login", jsonParser, (req, res) => {
     })
 
     if(lookup.length == 1)
-        res.send("Bearer "+"supersecretaccesstoken")
+        res.send({token: "Bearer "+"supersecretaccesstoken"})
     else {
         res.status(401)
-        res.send("Authentication failed")
+        res.send({error: "Authentication failed"})
     }
 })
 
@@ -63,7 +66,7 @@ app.post("/register", jsonParser, (req, res) => {
     })
     if (lookup.length > 0) {
         res.status(403)
-        res.send("User already registered")
+        res.send({error:"User already registered"})
     }
     else {
         const addedUser = {
@@ -72,7 +75,7 @@ app.post("/register", jsonParser, (req, res) => {
         }
         if(addedUser.password !== "" && addedUser.password !== undefined && addedUser.password !== null) {
             regUsers.push(addedUser);
-            res.send("User registered succesfuly");
+            res.send({message:"User registered succesfuly"});
         }
     }
 
