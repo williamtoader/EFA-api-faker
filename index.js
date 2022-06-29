@@ -7,7 +7,7 @@ const jsonParser = bodyparser.json();
 const app = express();
 
 const checkHeaderAuth = req => {
-    if (req.headers.get("Authorization") == "Bearer "+"supersecretaccesstoken") return true
+    if (req.header("Authorization") == "Bearer "+"supersecretaccesstoken") return true
     else return false;
 }
 
